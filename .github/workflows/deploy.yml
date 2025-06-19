@@ -1,5 +1,7 @@
+name: Upload Website
+
 on:
-  push: 
+  push:
     branches:
       - master
 
@@ -8,24 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: install dependencies
-        uses: npm install
+      - name: Install dependencies and build
+        run: |
+          npm install       # Changed from 'npm ci'
+          npm run build     # Make sure this outputs to ./dist
 
-      - name: Build Angular app
-        uses: npm run build --prod
-
-      - name: Deploy to s3
-        uses: jakejarvis/s3-sync-actions@v0.5.1
+      - uses: mchangrh/s3-sync-action@v1
         with:
-          args: --delete
+          args: --acl-public --follow-symlinks --delete-removed
         env:
           AWS_S3_BUCKET: github-action-s3-sync-bkt
           AWS_ACCESS_KEY_ID: ${{ secret.AWS_ACCESS_KEY_ID }}
