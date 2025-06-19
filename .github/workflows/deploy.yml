@@ -1,33 +1,35 @@
-name: Upload Website
+name: Deploy to S3
 
 on:
   push:
     branches:
-      - master
+      - main  # or your deployment branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+    - name: Set up Node.js (optional if you're building a JS app)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
 
-      - name: Install dependencies and build
-        run: |
-          npm install       # Changed from 'npm ci'
-          npm run build     # Make sure this outputs to ./dist
+    - name: Install dependencies and build
+      run: |
+        npm install
+        npm run build
 
-      - uses: mchangrh/s3-sync-action@v1
-        with:
-          args: --acl-public --follow-symlinks --delete-removed
-        env:
-          AWS_S3_BUCKET: github-action-s3-sync-bkt
-          AWS_ACCESS_KEY_ID: ${{ secret.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secret.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ap-south-1
-          SOURCE_DIR: dist/github-s3-sync
+    - name: Sync to S3
+      uses: jakejarvis/s3-sync-action@v0.5.1
+      with:
+        args: --delete
+      env:
+        AWS_S3_BUCKET: github-action-s3-sync-bkt
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ap-south-1  # optional
+        SOURCE_DIR: ./dist  # or ./build or wherever your output folder is
