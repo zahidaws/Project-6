@@ -9,10 +9,10 @@ jobs:
 
     steps:
       - name: checkout code
-        uses: action/checkout@v3
+        uses: actions/checkout@v3
 
       - name: setup Node.js
-        uses: action/setup-node@v4
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
@@ -23,7 +23,7 @@ jobs:
         uses: npm run build --prod
 
       - name: Deploy to s3
-        uses: jakejarvis/s3-sync-action@v0.5.1
+        uses: jakejarvis/s3-sync-actions@v0.5.1
         with:
           args: --delete
         env:
