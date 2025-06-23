@@ -1,0 +1,9 @@
+in git create a file index.html 
+and push to guthub
+in github create .github/workflows/deploy.yml
+create s3 bucket and eneble static web hosting and also create bucket policy
+create a iam user add access permission only s3 --> create access and privatekey of user
+in github --> go to settins --> secret and varibles --> add access key , secret key and bucket name 
+and do some changes in index.html file and commit if successfully build
+go to s3 bucket --> properties --> link static web copy --> paste in browser
+create a account in cloudflare purchase domain and in dns record add s3 static website link paste --> now browse with domain like... project6.com
