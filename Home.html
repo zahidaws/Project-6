@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TheBridalTouch - Premium Bridal Makeup & Mehendi Services</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-pink: #ec4899;
+      --dark-pink: #db2777;
+      --gold: #d4af37;
+      --light-gold: #f8e9c9;
+    }
+    
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .brand-font {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .navbar-dark .navbar-nav .nav-link:hover,
+    .navbar-dark .navbar-brand:hover { 
+      color: #fce7f3; 
+    }
+
+    @keyframes fadeInDown { 
+      from{opacity:0;transform:translateY(-20px);} 
+      to{opacity:1;transform:translateY(0);} 
+    }
+    
+    @keyframes fadeInUp { 
+      from{opacity:0;transform:translateY(20px);} 
+      to{opacity:1;transform:translateY(0);} 
+    }
+    
+    .animate-fadeInDown { 
+      animation: fadeInDown 0.6s ease-out forwards; 
+    }
+    
+    .animate-fadeInUp { 
+      animation: fadeInUp 0.6s ease-out forwards; 
+      animation-delay: 0.3s; 
+    }
+
+    .service-card { 
+      height: 100%; 
+      min-height: 350px; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+      transition: transform 0.2s ease; 
+    }
+    
+    .service-card:hover { 
+      transform: scale(1.05); 
+    }
+    
+    .service-card img { 
+      height: 200px; 
+      object-fit: cover; 
+      border-radius: 0.5rem 0.5rem 0 0; 
+    }
+
+    .badge { 
+      padding: 0.35em 0.65em; 
+      font-size: 0.75em; 
+      font-weight: 700; 
+      border-radius: 0.25rem; 
+    }
+
+    .btn-primary { 
+      background-color: var(--primary-pink); 
+      border-color: var(--primary-pink); 
+    }
+    
+    .btn-primary:hover { 
+      background-color: var(--dark-pink); 
+      border-color: var(--dark-pink); 
+    }
+
+    .modal-header { 
+      background-color: var(--primary-pink) !important; 
+      color: white !important; 
+    }
+    
+    .btn-close { 
+      filter: invert(1); 
+    }
+
+    /* Hero Slider Styles */
+    .hero-slider {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .slide.active {
+      opacity: 1;
+    }
+    
+    .slide-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 20px;
+    }
+    
+    .slide-indicators {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+    
+    .slide-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .slide-indicator.active {
+      background: var(--primary-pink);
+    }
+
+    /* Overlay for mobile only */
+    @media (max-width: 991px) {
+      #menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(6px);
+        z-index: 998;
+        display: none;
+      }
+      .navbar-collapse.show ~ #menu-overlay {
+        display: flex;
+      }
+      .navbar-collapse {
+        z-index: 999;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 1rem;
+        border-radius: 0.5rem;
+      }
+    }
+    
+    @media (min-width: 992px) {
+      #menu-overlay {
+        display: none !important;
+      }
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: scale(1.1);
+    }
+    
+    #location-status {
+      font-size: 0.8rem;
+      margin-top: 5px;
+    }
+    
+    .spinner-border-sm {
+      width: 1rem;
+      height: 1rem;
+    }
+    
+    /* WhatsApp Button */
+    .whatsapp-btn { 
+      position: fixed; 
+      bottom: 20px; 
+      right: 20px; 
+      background: #25d366; 
+      color: #fff; 
+      border-radius: 50%; 
+      width: 60px; 
+      height: 60px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 28px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2); 
+      cursor: pointer; 
+      z-index: 1000; 
+      transition: transform 0.2s; 
+    }
+    
+    .whatsapp-btn:hover { 
+      transform: scale(1.1); 
+    }
+
+    /* Assistant Chat Widget */
+    .chat-toggle { 
+      position: fixed; 
+      bottom: 90px; 
+      right: 20px; 
+      background: var(--primary-pink); 
+      color: #fff; 
+      border-radius: 50%; 
+      width: 55px; 
+      height: 55px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 22px; 
+      cursor: pointer; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2); 
+      z-index: 1000; 
+      transition: transform 0.2s; 
+    }
+    
+    .chat-toggle:hover { 
+      transform: scale(1.1); 
+    }
+    
+    .chat-widget { 
+      position: fixed; 
+      bottom: 150px; 
+      right: 20px; 
+      width: 300px; 
+      background: #fff; 
+      border-radius: 12px; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
+      overflow: hidden; 
+      display: none; 
+      flex-direction: column; 
+      z-index: 1000; 
+    }
+    
+    .chat-header { 
+      background: var(--primary-pink); 
+      color: #fff; 
+      padding: 12px; 
+      font-weight: bold; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    
+    .chat-body { 
+      max-height: 300px; 
+      overflow-y: auto; 
+      padding: 10px; 
+      font-size: 0.9rem; 
+    }
+    
+    .chat-message { 
+      margin-bottom: 10px; 
+    }
+    
+    .chat-message.user { 
+      text-align: right; 
+    }
+    
+    .chat-message.bot { 
+      text-align: left; 
+      color: #444; 
+    }
+    
+    .chat-footer { 
+      padding: 8px; 
+      border-top: 1px solid #eee; 
+      display: flex; 
+      gap: 5px; 
+    }
+    
+    .chat-footer input { 
+      flex: 1; 
+      border: 1px solid #ddd; 
+      border-radius: 20px; 
+      padding: 5px 12px; 
+      font-size: 0.85rem; 
+    }
+    
+    .chat-footer button { 
+      background: var(--primary-pink); 
+      color: #fff; 
+      border: none; 
+      border-radius: 20px; 
+      padding: 5px 12px; 
+      font-size: 0.85rem; 
+      cursor: pointer; 
+    }
+
+    /* Service Details Modal */
+    .service-modal-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    
+    .sub-service-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .sub-service-card:hover {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transform: translateY(-3px);
+    }
+    
+    .sub-service-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .sub-service-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--primary-pink);
+    }
+    
+    .sub-service-price {
+      font-weight: bold;
+      color: #4caf50;
+    }
+    
+    .sub-service-description {
+      color: #666;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+    
+    /* Custom Title Styles */
+    .brand-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--primary-pink) 0%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .brand-title::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    
+    .brand-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-top: -5px;
+    }
+    
+    /* Hero text enhancements */
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+    
+    /* Section title enhancements */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-pink), var(--gold));
+    }
+    
+    /* Custom logo styling */
+    .custom-logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary-pink) 0%, var(--gold) 100%);
+      border-radius: 50% !important; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+    
+    .custom-logo:hover {
+      transform: rotate(10deg) scale(1.1);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    
+    /* Gold accent elements */
+    .gold-accent {
+      color: var(--gold);
+    }
+    
+    /* Footer enhancements */
+    footer {
+      background: linear-gradient(to right, #2d3748, #1a202c);
+    }
+    
+    /* Navigation enhancements */
+    .navbar {
+      transition: background 0.3s ease;
+    }
+    
+    .navbar.scrolled {
+      background: rgba(0, 0, 0, 0.9) !important;
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top py-3" id="navbar">
+    <div class="container-fluid mx-auto px-4 sm:px-6 lg:px-8">
+      <a class="navbar-brand flex items-center space-x-3" href="#">
+        <div class="custom-logo">
+          <i class="fas fa-crown" href="#"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="brand-title text-2xl mb-2">TheBridalTouch</span>
+          <span class="brand-tagline">Where Elegance Meets Tradition</span>
+        </div>
+      </a>
+
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menu -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav space-x-4">
+          <li class="nav-item"><a class="nav-link text-white" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- Phone number shown below logo in toggle -->
+        <div class="d-lg-none mt-3 text-white w-100">
+          <p class="text-center font-bold"><i class="fas fa-phone gold-accent"></i> +91 9876543210</p>
+        </div>
+      </div>
+
+      <!-- Booking Button -->
+      <button type="button" class="btn btn-primary rounded-full px-4" data-bs-toggle="modal" data-bs-target="#bookingModal">
+        Book Now <span class="badge bg-white text-pink-500 ml-1" id="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+  <div id="menu-overlay"></div>
+
+  <!-- Hero Section with Slider -->
+  <header id="home" class="hero-slider">
+    <!-- Slide 1 -->
+    <div class="slide active" style="background-image: url('https://wallpapers.com/images/hd/beautiful-indian-bridal-makeup-00o424q61jblvfvv.jpg');">
+      <div class="slide-content">
+        <div class="text-center p-4">
+          <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 animate-fadeInDown">Enhancing Your <span class="gold-accent">Bridal Glow</span></h1>
+          <p class="hero-subtitle text-lg sm:text-xl lg:text-2xl mb-8 animate-fadeInUp">Makeup & Mehendi Ready for Your Big Day</p>
+          <a href="#services" class="btn btn-lg bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition">Book Now</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide 2 -->
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80');">
+      <div class="slide-content">
+        <div class="text-center p-4">
+          <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">Professional <span class="gold-accent">Bridal Makeup</span></h1>
+          <p class="hero-subtitle text-lg sm:text-xl lg:text-2xl mb-8">Expert artists for your perfect wedding look</p>
+          <a href="#services" class="btn btn-lg bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition">View Services</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide 3 -->
+    <div class="slide" style="background-image: url('https://as1.ftcdn.net/v2/jpg/10/82/56/96/1000_F_1082569681_OIot9wLTFFI02uq6I6PaztLRsNUHCZsV.jpg');">
+      <div class="slide-content">
+        <div class="text-center p-4">
+          <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">Exquisite <span class="gold-accent">Mehendi Designs</span></h1>
+          <p class="hero-subtitle text-lg sm:text-xl lg:text-2xl mb-8">Traditional and contemporary patterns for your special day</p>
+          <a href="#services" class="btn btn-lg bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition">Explore Gallery</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide 4 -->
+    <div class="slide" style="background-image: url('https://t4.ftcdn.net/jpg/16/72/30/23/360_F_1672302385_zKLWs7qHHNKxFu26A49ZCvESccNQ5ihB.jpg');">
+      <div class="slide-content">
+        <div class="text-center p-4">
+          <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">Complete <span class="gold-accent">Bridal Packages</span></h1>
+          <p class="hero-subtitle text-lg sm:text-xl lg:text-2xl mb-8">All your beauty needs in one place</p>
+          <a href="#services" class="btn btn-lg bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition">Get Quote</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide Indicators -->
+    <div class="slide-indicators">
+      <div class="slide-indicator active" data-slide="0"></div>
+      <div class="slide-indicator" data-slide="1"></div>
+      <div class="slide-indicator" data-slide="2"></div>
+      <div class="slide-indicator" data-slide="3"></div>
+    </div>
+  </header>
+
+  <!-- Services -->
+  <section id="services" class="py-16 bg-gray-50">
+    <div class="container mx-auto text-center px-4">
+      <h2 class="section-title text-3xl sm:text-4xl font-bold text-gray-800">Our Services</h2>
+      <div id="services-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="py-16 bg-white">
+    <div class="container mx-auto text-center px-4">
+      <h2 class="section-title text-3xl sm:text-4xl font-bold text-gray-800">Our Gallery</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="relative overflow-hidden rounded-lg shadow-lg group">
+          <img src="https://i.pinimg.com/originals/0c/9d/67/0c9d6727be71d573639557e328bea941.jpg" class="w-full h-64 object-cover transform transition duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100"><span class="text-white">Makeup</span></div>
+        </div>
+        <div class="relative overflow-hidden rounded-lg shadow-lg group">
+          <img src="https://images.pexels.com/photos/13946208/pexels-photo-13946208.jpeg" class="w-full h-64 object-cover transform transition duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100"><span class="text-white">Mehendi</span></div>
+        </div>
+        <div class="relative overflow-hidden rounded-lg shadow-lg group">
+          <img src="https://i.pinimg.com/736x/0e/32/7c/0e327c47b9fdd0dfc6c43656f6e39549.jpg" class="w-full h-64 object-cover transition duration-300 group-hover:scale-110">
+          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100"><span class="text-white">Hair Styling</span></div>
+        </div>
+        <div class="relative overflow-hidden rounded-lg shadow-lg group">
+          <img src="https://i.pinimg.com/originals/db/eb/a0/dbeba0a9bf945e275d52eab95de723bd.jpg" class="w-full h-64 object-cover transition duration-300 group-hover:scale-110">
+          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100"><span class="text-white">Hair Styling</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-gray-800">Get in Touch</h2>
+      <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md">
+        <form id="contact-form">
+          <div class="mb-4"><label class="block text-gray-700 font-bold mb-2">Name</label><input type="text" class="form-control w-full border rounded-md focus:ring-2 focus:ring-pink-500" required></div>
+          <div class="mb-4"><label class="block text-gray-700 font-bold mb-2">Email</label><input type="email" class="form-control w-full border rounded-md focus:ring-2 focus:ring-pink-500" required></div>
+          <div class="mb-4"><label class="block text-gray-700 font-bold mb-2">Message</label><textarea rows="4" class="form-control w-full border rounded-md focus:ring-2 focus:ring-pink-500" required></textarea></div>
+          <div class="text-center"><button type="submit" class="btn bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full">Send Message</button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8 text-center">
+    <div class="container mx-auto">
+      <div class="flex flex-col items-center mb-6">
+        <div class="custom-logo mb-4">
+          <i class="fas fa-crown"></i>
+        </div>
+        <h3 class="brand-title text-2xl mb-2">TheBridalTouch</h3>
+        <p class="brand-tagline">Where Elegance Meets Tradition</p>
+      </div>
+      <div class="flex justify-center space-x-6 mb-6">
+        <a href="https://www.facebook.com/" class="text-2xl hover:text-pink-400 transition" target="_main"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/" class="text-2xl hover:text-pink-400 transition" target="_main"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/9296218880" class="text-2xl hover:text-pink-400 transition" target="_main"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <p>&copy; 2025 TheBridalTouch. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Booking Modal -->
+  <div class="modal fade" id="bookingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-pink-500 text-white">
+          <h5 class="modal-title">Your Bookings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="cart-items-container"><p id="empty-cart-message" class="text-gray-500 text-center">Your cart is empty.</p></div>
+          <div class="mt-4 pt-4 border-t border-gray-200 flex justify-between font-bold">
+            <span>Total Price:</span><span id="total-price">₹0.00</span>
+          </div>
+
+          <!-- Booking Details -->
+          <div class="mt-4">
+            <label>Name:</label>
+            <input type="text" id="name-input" class="form-control mb-2" required>
+
+            <label>Phone:</label>
+            <input type="text" id="phone-input" class="form-control mb-2" required>
+
+            <label>House No:</label>
+            <input type="text" id="house-input" class="form-control mb-2" required>
+
+            <label>Area:</label>
+            <input type="text" id="area-input" class="form-control mb-2" required>
+
+            <label>City:</label>
+            <input type="text" id="city-input" class="form-control mb-2" required>
+
+            <label>Pincode:</label>
+            <input type="text" id="pincode-input" class="form-control mb-2" required>
+
+            <button type="button" class="btn btn-secondary mt-2 w-100" id="get-location-btn">
+              <span id="location-btn-text">Use Current Location</span>
+              <span id="location-spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+            </button>
+            <p id="location-status" class="text-sm mt-2"></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary" id="final-confirm-btn">Confirm Booking</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Details Modal -->
+  <div class="modal fade" id="serviceDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-pink-500 text-white">
+          <h5 class="modal-title" id="service-details-title">Service Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <img id="service-details-img" class="service-modal-img" src="" alt="">
+            </div>
+          </div>
+          <h4 id="service-details-name" class="font-bold mb-3 text-center"></h4>
+          <p id="service-details-description" class="mb-4 text-center"></p>
+          
+          <h5 class="font-bold mb-3">Available Packages</h5>
+          <div id="sub-services-container"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- WhatsApp Floating Button -->
+  <div class="whatsapp-btn" id="whatsapp-btn">
+    <a href="https://wa.me/9296218880"><i class="fab fa-whatsapp" target="_main" ></i></a>
+  </div>
+
+  <!-- Assistant Chat -->
+  <div class="chat-toggle" id="chat-toggle">
+    <i class="fas fa-comments"></i>
+  </div>
+  <div class="chat-widget" id="chat-widget">
+    <div class="chat-header">
+      Bridal Assistant
+      <span style="cursor:pointer;" id="close-chat">&times;</span>
+    </div>
+    <div class="chat-body" id="chat-body">
+      <div class="chat-message bot">Hi 👋 How can I help you with your special day?</div>
+    </div>
+    <div class="chat-footer">
+      <input type="text" id="chat-input" placeholder="Ask something...">
+      <button id="send-chat">Send</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const services = [
+        { 
+          id: 1, 
+          name: 'Bridal Makeup', 
+          img: 'https://i.pinimg.com/originals/7b/6d/97/7b6d97b6694dc57cda8c50ab5c5b3243.jpg',
+          description: 'Our premium bridal makeup packages are designed to make you look stunning on your special day. Each package includes a trial session and uses high-quality, long-lasting products.',
+          subServices: [
+            {
+              name: 'Classic Bridal Package',
+              price: 15000,
+              description: 'Basic bridal makeup with natural look, includes makeup trial, base makeup, eye makeup, and lip color.'
+            },
+            {
+              name: 'Premium Bridal Package',
+              price: 25000,
+              description: 'Complete bridal transformation with airbrush makeup, false lashes, contouring, and touch-up kit.'
+            },
+            {
+              name: 'Royal Bridal Package',
+              price: 35000,
+              description: 'Luxury package with HD makeup, individual lashes, professional photoshoot makeup, and personal assistant.'
+            },
+            {
+              name: 'Destination Wedding Package',
+              price: 45000,
+              description: 'Special package for destination weddings including multiple functions, travel arrangements, and on-site services.'
+            },
+            {
+              name: 'Bridal Trial Session',
+              price: 5000,
+              description: 'Dedicated trial session to finalize your bridal look before the wedding day.'
+            }
+          ]
+        },
+        { 
+          id: 2, 
+          name: 'Party Makeup', 
+          img: 'https://wallpaperbat.com/img/885749-beautiful-bride-makeup-ultra-hd-desktop-background-wallpaper-for-4k-uhd-tv-widescreen-ultrawide-desktop-laptop-multi-display-dual-monitor-tablet-smartphone.jpg',
+          description: 'Get party-ready with our professional makeup services for all occasions from engagement parties to receptions.',
+          subServices: [
+            {
+              name: 'Engagement Party Makeup',
+              price: 8000,
+              description: 'Special makeup for engagement ceremonies with emphasis on photography-ready look.'
+            },
+            {
+              name: 'Reception Makeup',
+              price: 12000,
+              description: 'Elegant makeup for wedding receptions with long-lasting formulas for all-night events.'
+            },
+            {
+              name: 'Sangeet Makeup',
+              price: 7000,
+              description: 'Fun and glamorous makeup for sangeet ceremonies with glitter and shine elements.'
+            },
+            {
+              name: 'Cocktail Party Makeup',
+              price: 6000,
+              description: 'Chic and sophisticated makeup for cocktail parties and informal gatherings.'
+            }
+          ]
+        },
+        { 
+          id: 3, 
+          name: 'Mehendi Design', 
+          img: 'https://5.imimg.com/data5/SELLER/Default/2022/8/QG/QX/EM/138879151/mehndi-designs--1000x1000.jpg',
+          description: 'Traditional and contemporary mehendi designs applied by expert artists using high-quality natural henna.',
+          subServices: [
+            {
+              name: 'Basic Hand Design',
+              price: 3000,
+              description: 'Simple mehendi design covering palms with basic patterns and motifs.'
+            },
+            {
+              name: 'Full Hand Design',
+              price: 6000,
+              description: 'Intricate designs covering full hands up to wrists with detailed patterns.'
+            },
+            {
+              name: 'Bridal Full Arms',
+              price: 10000,
+              description: 'Complete bridal mehendi covering full arms and feet with elaborate designs.'
+            },
+            {
+              name: 'Special Design with Stones',
+              price: 8000,
+              description: 'Premium mehendi design with stone work and special patterns for important functions.'
+            },
+            {
+              name: 'Arabic Mehendi Design',
+              price: 7000,
+              description: 'Elegant Arabic style mehendi with floral patterns and open designs.'
+            }
+          ]
+        },
+        { 
+          id: 4, 
+          name: 'Hair Styling', 
+          img: 'https://images.unsplash.com/photo-1595867818082-083862f3aaf4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          description: 'Complete bridal hair styling with accessories to complement your makeup and outfit.',
+          subServices: [
+            {
+              name: 'Basic Bridal Hairstyle',
+              price: 4000,
+              description: 'Traditional bridal hairstyle with simple accessories and basic styling.'
+            },
+            {
+              name: 'Premium Bridal Hairstyle',
+              price: 7000,
+              description: 'Elaborate bridal hairstyle with hair extensions, intricate braiding, and premium accessories.'
+            },
+            {
+              name: 'Hair Care Treatment',
+              price: 3000,
+              description: 'Pre-wedding hair treatment for smooth, shiny, and manageable hair.'
+            },
+            {
+              name: 'Accessories Styling',
+              price: 2500,
+              description: 'Professional styling with traditional hair accessories like maang tikka, jhoomar, etc.'
+            }
+          ]
+        },
+        { 
+          id: 5, 
+          name: 'Skincare Packages', 
+          img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          description: 'Pre-wedding skincare treatments to ensure you have a radiant glow on your big day.',
+          subServices: [
+            {
+              name: 'Basic Bridal Glow Package',
+              price: 8000,
+              description: '4 sessions of cleansing, exfoliation, and hydration for radiant skin.'
+            },
+            {
+              name: 'Premium Bridal Glow Package',
+              price: 15000,
+              description: '8 sessions including facials, peels, and specialized treatments for flawless skin.'
+            },
+            {
+              name: 'Bridal De-tan Treatment',
+              price: 5000,
+              description: 'Specialized treatment to remove tan and even out skin tone before wedding.'
+            },
+            {
+              name: 'Acne Clear Package',
+              price: 12000,
+              description: 'Targeted treatments for acne-prone skin with calming and healing therapies.'
+            }
+          ]
+        },
+        { 
+          id: 6, 
+          name: 'Women Salon Home', 
+          img: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          description: 'Professional salon services at your doorstep for your convenience and comfort.',
+          subServices: [
+            {
+              name: 'Complete Grooming Package',
+              price: 5000,
+              description: 'Includes haircut, styling, manicure, pedicure, and basic facial.'
+            },
+            {
+              name: 'Hair Care & Styling',
+              price: 2500,
+              description: 'Professional haircut, wash, blow dry, and styling at your home.'
+            },
+            {
+              name: 'Facial & Skin Care',
+              price: 3000,
+              description: 'Revitalizing facial with cleansing, exfoliation, and moisturizing treatments.'
+            },
+            {
+              name: 'Manicure & Pedicure',
+              price: 2000,
+              description: 'Complete nail care with shaping, cuticle care, and polish application.'
+            },
+            {
+              name: 'Threading & Waxing',
+              price: 1500,
+              description: 'Professional hair removal services for face and body.'
+            }
+          ]
+        }
+      ];
+
+      const servicesContainer = document.getElementById('services-container');
+      const cartCountElement = document.getElementById('cart-count');
+      const cartItemsContainer = document.getElementById('cart-items-container');
+      const totalPriceElement = document.getElementById('total-price');
+      const emptyCartMessage = document.getElementById('empty-cart-message');
+      const finalConfirmBtn = document.getElementById('final-confirm-btn');
+      const getLocationBtn = document.getElementById('get-location-btn');
+      const subServicesContainer = document.getElementById('sub-services-container');
+      let cart = [];
+
+      // Render Services (without prices)
+      services.forEach(service => {
+        const serviceCard = document.createElement('div');
+        serviceCard.innerHTML = `
+          <div class="card service-card shadow-md">
+            <img src="${service.img}" alt="${service.name}">
+            <div class="card-body p-4 text-left flex flex-col justify-between">
+              <h5 class="text-xl font-bold mb-2">${service.name}</h5>
+              <p class="text-gray-600 mb-3">Premium quality service tailored for your special day</p>
+              <button class="btn btn-outline-primary w-full view-details-btn" data-id="${service.id}">View Details</button>
+            </div>
+          </div>`;
+        servicesContainer.appendChild(serviceCard);
+      });
+
+      // Service Details Modal
+      const serviceDetailsModal = new bootstrap.Modal(document.getElementById('serviceDetailsModal'));
+      let currentService = null;
+
+      // View Details button click
+      servicesContainer.addEventListener('click', e => {
+        if (e.target.classList.contains('view-details-btn')) {
+          const id = parseInt(e.target.dataset.id);
+          currentService = services.find(s => s.id === id);
+          
+          // Populate modal with service details
+          document.getElementById('service-details-title').textContent = currentService.name;
+          document.getElementById('service-details-name').textContent = currentService.name;
+          document.getElementById('service-details-img').src = currentService.img;
+          document.getElementById('service-details-description').textContent = currentService.description;
+          
+          // Clear previous sub-services
+          subServicesContainer.innerHTML = '';
+          
+          // Add sub-services
+          currentService.subServices.forEach(subService => {
+            const subServiceElement = document.createElement('div');
+            subServiceElement.className = 'sub-service-card';
+            subServiceElement.innerHTML = `
+              <div class="sub-service-header">
+                <div class="sub-service-title">${subService.name}</div>
+                <div class="sub-service-price">₹${subService.price.toLocaleString()}</div>
+              </div>
+              <div class="sub-service-description">${subService.description}</div>
+              <button class="btn btn-primary btn-sm add-sub-service" data-price="${subService.price}" data-name="${subService.name}">
+                Add to Cart
+              </button>
+            `;
+            subServicesContainer.appendChild(subServiceElement);
+          });
+          
+          // Show the modal
+          serviceDetailsModal.show();
+        }
+      });
+
+      // Add sub-service to cart
+      subServicesContainer.addEventListener('click', e => {
+        if (e.target.classList.contains('add-sub-service')) {
+          const name = e.target.dataset.name;
+          const price = parseInt(e.target.dataset.price);
+          
+          cart.push({ name, price });
+          updateCartUI();
+          
+          // Show confirmation
+          const toast = document.createElement('div');
+          toast.className = 'position-fixed bottom-0 end-0 p-3';
+          toast.innerHTML = `
+            <div class="toast align-items-center text-white bg-success border-0 show" role="alert">
+              <div class="d-flex">
+                <div class="toast-body">
+                  ${name} added to cart!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(toast);
+          
+          // Remove toast after 3 seconds
+          setTimeout(() => {
+            document.body.removeChild(toast);
+          }, 3000);
+        }
+      });
+
+      function updateCartUI() {
+        cartCountElement.textContent = cart.length;
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+        if (cart.length === 0) {
+          emptyCartMessage.style.display = 'block';
+        } else {
+          emptyCartMessage.style.display = 'none';
+          cart.forEach(item => {
+            total += item.price;
+            cartItemsContainer.innerHTML += `<div class="d-flex justify-content-between py-2 border-b"><span>${item.name}</span><span>₹${item.price.toLocaleString()}</span></div>`;
+          });
+        }
+        totalPriceElement.textContent = `₹${total.toLocaleString()}`;
+      }
+
+      finalConfirmBtn.addEventListener('click', () => {
+        const name = document.getElementById('name-input').value;
+        const phone = document.getElementById('phone-input').value;
+        const house = document.getElementById('house-input').value;
+        const area = document.getElementById('area-input').value;
+        const city = document.getElementById('city-input').value;
+        const pincode = document.getElementById('pincode-input').value;
+
+        if (!name || !phone || !house || !area || !city || !pincode) {
+          alert('Please fill all fields');
+          return;
+        }
+
+        alert('Booking Confirmed!\n\nThank you for choosing TheBridalTouch.');
+        cart = [];
+        updateCartUI();
+        document.querySelector('#bookingModal .btn-close').click();
+      });
+
+      // Hero Slider Functionality
+      const slides = document.querySelectorAll('.slide');
+      const indicators = document.querySelectorAll('.slide-indicator');
+      let currentSlide = 0;
+      
+      function showSlide(index) {
+        // Hide all slides
+        slides.forEach(slide => slide.classList.remove('active'));
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        
+        // Show the selected slide
+        slides[index].classList.add('active');
+        indicators[index].classList.add('active');
+        
+        currentSlide = index;
+      }
+      
+      // Auto-advance slides
+      function nextSlide() {
+        let next = currentSlide + 1;
+        if (next >= slides.length) next = 0;
+        showSlide(next);
+      }
+      
+      // Set up auto-advance
+      let slideInterval = setInterval(nextSlide, 2000);
+      
+      // Add click events to indicators
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+          clearInterval(slideInterval);
+          showSlide(index);
+          slideInterval = setInterval(nextSlide, 2000);
+        });
+      });
+      
+      // Pause slider on hover
+      const heroSlider = document.querySelector('.hero-slider');
+      heroSlider.addEventListener('mouseenter', () => {
+        clearInterval(slideInterval);
+      });
+      
+      heroSlider.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(nextSlide, 2000);
+      });
+      
+      // Navbar scroll effect
+      window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+      
+      // WhatsApp button
+      document.getElementById('whatsapp-btn').addEventListener('click', () => {
+        window.open('https://wa.me/919876543210?text=Hello%20TheBridalTouch!%20I%20would%20like%20to%20know%20more%20about%20your%20services.', '_blank');
+      });
+
+      // Chat widget
+      const chatWidget = document.getElementById('chat-widget');
+      const chatToggle = document.getElementById('chat-toggle');
+      const chatBody = document.getElementById('chat-body');
+      const chatInput = document.getElementById('chat-input');
+      const sendChatBtn = document.getElementById('send-chat');
+      const closeChat = document.getElementById('close-chat');
+
+      chatToggle.addEventListener('click', () => {
+        chatWidget.style.display = chatWidget.style.display === "flex" ? "none" : "flex";
+      });
+      closeChat.addEventListener('click', () => { chatWidget.style.display = "none"; });
+
+      const responses = {
+        "hello": "Hello beautiful! 👋 How can I assist you with your special day?",
+        "services": "We offer Bridal Makeup, Party Makeup, Mehendi, Hair Styling, Skincare Packages, and Women Salon Home Services. Which one interests you?",
+        "price": "Our services range from ₹1,500 to ₹45,000 depending on the package. Would you like to see our detailed pricing?",
+        "contact": "You can reach us at +91 9876543210 or message us on WhatsApp for a quicker response!",
+        "booking": "Click the 'Book Now' button at the top to reserve your slot. We recommend booking at least 2 months in advance for weddings.",
+        "makeup": "Our makeup artists specialize in both traditional and contemporary bridal looks using premium products that last all day.",
+        "mehendi": "We offer intricate mehendi designs from traditional to modern styles using high-quality natural henna for a dark, long-lasting stain.",
+        "salon": "Our Women Salon Home service brings professional beauty treatments to your doorstep for your convenience and comfort.",
+        "default": "I'm not sure about that. Please call us at +91 9876543210 for detailed information, or ask about our services, pricing, or booking process."
+      };
+
+      sendChatBtn.addEventListener('click', () => {
+        const msg = chatInput.value.trim().toLowerCase();
+        if (!msg) return;
+        chatBody.innerHTML += `<div class="chat-message user">${chatInput.value}</div>`;
+        chatInput.value = "";
+        setTimeout(() => {
+          let reply = responses["default"];
+          
+          if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
+            reply = responses["hello"];
+          } else if (msg.includes('service') || msg.includes('offer')) {
+            reply = responses["services"];
+          } else if (msg.includes('price') || msg.includes('cost') || msg.includes('how much')) {
+            reply = responses["price"];
+          } else if (msg.includes('contact') || msg.includes('number') || msg.includes('call')) {
+            reply = responses["contact"];
+          } else if (msg.includes('book') || msg.includes('appointment') || msg.includes('schedule')) {
+            reply = responses["booking"];
+          } else if (msg.includes('makeup') || msg.includes('cosmetic')) {
+            reply = responses["makeup"];
+          } else if (msg.includes('mehendi') || msg.includes('henna')) {
+            reply = responses["mehendi"];
+          } else if (msg.includes('salon') || msg.includes('home service') || msg.includes('grooming')) {
+            reply = responses["salon"];
+          }
+          
+          chatBody.innerHTML += `<div class="chat-message bot">${reply}</div>`;
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }, 500);
+      });
+
+      // Quick replies for chat
+      const quickReplies = [
+        "What services do you offer?",
+        "How much does bridal makeup cost?",
+        "How to book an appointment?",
+        "Do you do home visits?"
+      ];
+
+      // Add quick replies to chat
+      quickReplies.forEach(reply => {
+        const quickReplyElem = document.createElement('div');
+        quickReplyElem.className = 'quick-reply';
+        quickReplyElem.textContent = reply;
+        quickReplyElem.style.cssText = 'background: #f1f1f1; padding: 8px 12px; border-radius: 18px; margin: 5px 0; cursor: pointer; font-size: 0.8rem; display: inline-block;';
+        quickReplyElem.addEventListener('click', () => {
+          chatInput.value = reply;
+          sendChatBtn.click();
+        });
+        chatBody.appendChild(quickReplyElem);
+      });
+
+      // Geolocation functionality
+      getLocationBtn.addEventListener('click', getLocation);
+      
+      function getLocation() {
+        const locationBtnText = document.getElementById('location-btn-text');
+        const locationSpinner = document.getElementById('location-spinner');
+        const locationStatus = document.getElementById('location-status');
+        
+        // Show loading state
+        locationBtnText.textContent = "Getting location...";
+        locationSpinner.classList.remove('d-none');
+        locationStatus.textContent = "";
+        locationStatus.className = "text-sm mt-2 text-info";
+        
+        if (navigator.geolocation) {
+          // Set timeout for geolocation request
+          const options = {
+            enableHighAccuracy: true,
+            timeout: 10000, // 10 seconds
+            maximumAge: 60000 // 1 minute
+          };
+          
+          navigator.geolocation.getCurrentPosition(
+            position => showPosition(position),
+            error => handleGeolocationError(error),
+            options
+          );
+        } else {
+          locationStatus.textContent = "Geolocation is not supported by this browser.";
+          locationStatus.className = "text-sm mt-2 text-danger";
+          resetLocationButton();
+        }
+      }
+      
+      function showPosition(position) {
+        const locationStatus = document.getElementById('location-status');
+        locationStatus.textContent = "Location found! Getting address details...";
+        locationStatus.className = "text-sm mt-2 text-info";
+        
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        
+        // Using OpenStreetMap's Nominatim API for reverse geocoding
+        const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`;
+        
+        fetch(url)
+          .then(res => res.json())
+          .then(data => {
+            if (data && data.address) {
+              fillAddressFields(data.address);
+              locationStatus.textContent = "Address filled successfully!";
+              locationStatus.className = "text-sm mt-2 text-success";
+            } else {
+              locationStatus.textContent = "Could not get address details. Please try again.";
+              locationStatus.className = "text-sm mt-2 text-warning";
+            }
+            resetLocationButton();
+          })
+          .catch(err => {
+            console.error(err);
+            locationStatus.textContent = "Error fetching address details. Please try again.";
+            locationStatus.className = "text-sm mt-2 text-danger";
+            resetLocationButton();
+          });
+      }
+      
+      function handleGeolocationError(error) {
+        const locationStatus = document.getElementById('location-status');
+        let errorMessage = "Unable to fetch location. Please enter manually.";
+        
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = "Location access denied. Please enable location services in your browser settings or enter address manually.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = "Location information unavailable. Please check your connection or enter address manually.";
+            break;
+          case error.TIMEOUT:
+            errorMessage = "Location request timed out. Please try again or enter address manually.";
+            break;
+          default:
+            errorMessage = "An unknown error occurred. Please enter address manually.";
+        }
+        
+        locationStatus.textContent = errorMessage;
+        locationStatus.className = "text-sm mt-2 text-danger";
+        resetLocationButton();
+      }
+      
+      function fillAddressFields(address) {
+        // Extract address components from the response
+        const house = address.house_number || address.house || "";
+        const road = address.road || "";
+        const suburb = address.suburb || "";
+        const city = address.city || address.town || address.village || address.county || "";
+        const postcode = address.postcode || "";
+        
+        // Set the values in the form
+        document.getElementById('house-input').value = house;
+        document.getElementById('area-input').value = [road, suburb].filter(Boolean).join(", ");
+        document.getElementById('city-input').value = city;
+        document.getElementById('pincode-input').value = postcode;
+      }
+      
+      function resetLocationButton() {
+        const locationBtnText = document.getElementById('location-btn-text');
+        const locationSpinner = document.getElementById('location-spinner');
+        
+        locationBtnText.textContent = "Use Current Location";
+        locationSpinner.classList.add('d-none');
+      }
+    });
+  </script>
+</body>
+</html>
