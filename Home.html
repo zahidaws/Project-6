@@ -473,6 +473,27 @@
       background: rgba(0, 0, 0, 0.9) !important;
       backdrop-filter: blur(10px);
     }
+    
+    /* Service button enhancements */
+    .service-btn {
+      background: linear-gradient(135deg, var(--primary-pink) 0%, var(--dark-pink) 100%);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+    
+    .service-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      color: white;
+    }
   </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -507,7 +528,7 @@
 
         <!-- Phone number shown below logo in toggle -->
         <div class="d-lg-none mt-3 text-white w-100">
-          <p class="text-center font-bold"><i class="fas fa-phone gold-accent"></i> +91 9876543210</p>
+          <p class="text-center font-bold"><i class="fas fa-phone gold-accent"></i> +91 9296218880</p>
         </div>
       </div>
 
@@ -747,6 +768,7 @@
           name: 'Bridal Makeup', 
           img: 'https://i.pinimg.com/originals/7b/6d/97/7b6d97b6694dc57cda8c50ab5c5b3243.jpg',
           description: 'Our premium bridal makeup packages are designed to make you look stunning on your special day. Each package includes a trial session and uses high-quality, long-lasting products.',
+          pageUrl: 'bridal-makeup.html',
           subServices: [
             {
               name: 'Classic Bridal Package',
@@ -780,6 +802,7 @@
           name: 'Party Makeup', 
           img: 'https://wallpaperbat.com/img/885749-beautiful-bride-makeup-ultra-hd-desktop-background-wallpaper-for-4k-uhd-tv-widescreen-ultrawide-desktop-laptop-multi-display-dual-monitor-tablet-smartphone.jpg',
           description: 'Get party-ready with our professional makeup services for all occasions from engagement parties to receptions.',
+          pageUrl: 'party-makeup.html',
           subServices: [
             {
               name: 'Engagement Party Makeup',
@@ -808,6 +831,7 @@
           name: 'Mehendi Design', 
           img: 'https://5.imimg.com/data5/SELLER/Default/2022/8/QG/QX/EM/138879151/mehndi-designs--1000x1000.jpg',
           description: 'Traditional and contemporary mehendi designs applied by expert artists using high-quality natural henna.',
+          pageUrl: 'mehendi-design.html',
           subServices: [
             {
               name: 'Basic Hand Design',
@@ -839,8 +863,9 @@
         { 
           id: 4, 
           name: 'Hair Styling', 
-          img: 'https://images.unsplash.com/photo-1595867818082-083862f3aaf4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          img: 'http://2.bp.blogspot.com/-vcUIhTGMsNQ/TkL2ZGkXYDI/AAAAAAAACXg/w6BB1fOHyGI/s1600/hairstyles2.jpg',
           description: 'Complete bridal hair styling with accessories to complement your makeup and outfit.',
+          pageUrl: 'hair-styling.html',
           subServices: [
             {
               name: 'Basic Bridal Hairstyle',
@@ -869,6 +894,7 @@
           name: 'Skincare Packages', 
           img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
           description: 'Pre-wedding skincare treatments to ensure you have a radiant glow on your big day.',
+          pageUrl: 'skincare-packages.html',
           subServices: [
             {
               name: 'Basic Bridal Glow Package',
@@ -897,6 +923,7 @@
           name: 'Women Salon Home', 
           img: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
           description: 'Professional salon services at your doorstep for your convenience and comfort.',
+          pageUrl: 'salon-home.html',
           subServices: [
             {
               name: 'Complete Grooming Package',
@@ -946,7 +973,7 @@
             <div class="card-body p-4 text-left flex flex-col justify-between">
               <h5 class="text-xl font-bold mb-2">${service.name}</h5>
               <p class="text-gray-600 mb-3">Premium quality service tailored for your special day</p>
-              <button class="btn btn-outline-primary w-full view-details-btn" data-id="${service.id}">View Details</button>
+              <a href="${service.pageUrl}" class="service-btn w-full text-center">Explore ${service.name}</a>
             </div>
           </div>`;
         servicesContainer.appendChild(serviceCard);
@@ -955,74 +982,6 @@
       // Service Details Modal
       const serviceDetailsModal = new bootstrap.Modal(document.getElementById('serviceDetailsModal'));
       let currentService = null;
-
-      // View Details button click
-      servicesContainer.addEventListener('click', e => {
-        if (e.target.classList.contains('view-details-btn')) {
-          const id = parseInt(e.target.dataset.id);
-          currentService = services.find(s => s.id === id);
-          
-          // Populate modal with service details
-          document.getElementById('service-details-title').textContent = currentService.name;
-          document.getElementById('service-details-name').textContent = currentService.name;
-          document.getElementById('service-details-img').src = currentService.img;
-          document.getElementById('service-details-description').textContent = currentService.description;
-          
-          // Clear previous sub-services
-          subServicesContainer.innerHTML = '';
-          
-          // Add sub-services
-          currentService.subServices.forEach(subService => {
-            const subServiceElement = document.createElement('div');
-            subServiceElement.className = 'sub-service-card';
-            subServiceElement.innerHTML = `
-              <div class="sub-service-header">
-                <div class="sub-service-title">${subService.name}</div>
-                <div class="sub-service-price">₹${subService.price.toLocaleString()}</div>
-              </div>
-              <div class="sub-service-description">${subService.description}</div>
-              <button class="btn btn-primary btn-sm add-sub-service" data-price="${subService.price}" data-name="${subService.name}">
-                Add to Cart
-              </button>
-            `;
-            subServicesContainer.appendChild(subServiceElement);
-          });
-          
-          // Show the modal
-          serviceDetailsModal.show();
-        }
-      });
-
-      // Add sub-service to cart
-      subServicesContainer.addEventListener('click', e => {
-        if (e.target.classList.contains('add-sub-service')) {
-          const name = e.target.dataset.name;
-          const price = parseInt(e.target.dataset.price);
-          
-          cart.push({ name, price });
-          updateCartUI();
-          
-          // Show confirmation
-          const toast = document.createElement('div');
-          toast.className = 'position-fixed bottom-0 end-0 p-3';
-          toast.innerHTML = `
-            <div class="toast align-items-center text-white bg-success border-0 show" role="alert">
-              <div class="d-flex">
-                <div class="toast-body">
-                  ${name} added to cart!
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-              </div>
-            </div>
-          `;
-          document.body.appendChild(toast);
-          
-          // Remove toast after 3 seconds
-          setTimeout(() => {
-            document.body.removeChild(toast);
-          }, 3000);
-        }
-      });
 
       function updateCartUI() {
         cartCountElement.textContent = cart.length;
