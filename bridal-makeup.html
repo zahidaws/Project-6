@@ -920,6 +920,67 @@
             </div>
           `;
           document.body.appendChild(toast);
+
+          // Add this code to your existing JavaScript
+
+// Sample booked appointments (in a real app, this would come from a server)
+const bookedAppointments = [
+  { date: '2025-09-20', time: '10:00 AM' },
+  { date: '2025-09-20', time: '2:00 PM' },
+  { date: '2025-09-22', time: '11:00 AM' },
+  { date: '2025-09-22', time: '4:00 PM' }
+];
+
+// Function to check if a time slot is available
+function isTimeSlotAvailable(date, time) {
+  return !bookedAppointments.some(appt => 
+    appt.date === date && appt.time === time
+  );
+}
+
+// Update the generateTimeSlots function to check availability
+function generateTimeSlots() {
+  const timeSlots = [
+    '9:00 AM', '10:00 AM', '11:00 AM', 
+    '12:00 PM', '1:00 PM', '2:00 PM', 
+    '3:00 PM', '4:00 PM', '5:00 PM'
+  ];
+  
+  timeSlotsContainer.innerHTML = '';
+  
+  timeSlots.forEach(slot => {
+    const slotElement = document.createElement('div');
+    const isAvailable = selectedDate ? isTimeSlotAvailable(selectedDate, slot) : true;
+    
+    slotElement.className = `time-slot ${!isAvailable ? 'unavailable' : ''}`;
+    slotElement.textContent = slot;
+    slotElement.dataset.time = slot;
+    
+    if (isAvailable) {
+      slotElement.addEventListener('click', () => selectTimeSlot(slot));
+    }
+    
+    timeSlotsContainer.appendChild(slotElement);
+  });
+}
+
+// Update the date change event to regenerate time slots with availability
+bookingDateInput.addEventListener('change', (e) => {
+  selectedDate = e.target.value;
+  const dateObj = new Date(selectedDate);
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  selectedDateText.textContent = dateObj.toLocaleDateString('en-US', options);
+  
+  // Regenerate time slots with availability check
+  generateTimeSlots();
+  
+  // Reset selected time
+  selectedTime = null;
+  selectedTimeText.textContent = 'No time selected';
+});
+
+// Also call generateTimeSlots on page load
+generateTimeSlots();
           
           // Remove toast after 3 seconds
           setTimeout(() => {
@@ -950,7 +1011,7 @@
       // Function to send data to Google Sheets
       async function sendDataToGoogleSheets(bookingData) {
         // Replace with your Google Apps Script Web App URL
-        const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyDtD5sZRYBZN32mGYBVKnyfJGAgLQs0NPXfJ7FtgOtPnwOaPf3CzBVjAy_A67C2992MQ/execc';
         
         try {
           const response = await fetch(scriptURL, {
@@ -1141,6 +1202,8 @@
         locationBtnText.textContent = "Use Current Location";
         locationSpinner.classList.add('d-none');
       }
+
+      // AKfycbyDtD5sZRYBZN32mGYBVKnyfJGAgLQs0NPXfJ7FtgOtPnwOaPf3CzBVjAy_A67C2992MQ
       
       // Initialize time slots
       generateTimeSlots();
