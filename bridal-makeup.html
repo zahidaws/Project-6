@@ -24,7 +24,7 @@
       background-color: #f9fafb;
       margin: 0;
       padding: 0;
-      padding-top: 90px; /* Added padding to prevent content from being hidden behind fixed navbar */
+      padding-top: 90px;
     }
     
     .brand-font {
@@ -36,27 +36,25 @@
       color: #fce7f3; 
     }
 
-    /* Fixed navbar styling */
     .navbar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       width: 100%;
-      z-index: 1030; /* High z-index to ensure navbar stays on top */
-      background: rgba(0, 0, 0, 0.9) !important; /* Solid background for better visibility */
+      z-index: 1030;
+      background: rgba(0, 0, 0, 0.9) !important;
       backdrop-filter: blur(10px);
       transition: all 0.3s ease;
     }
     
-    /* Floating Book Now Button */
     .floating-book-btn {
       position: fixed;
       bottom: 30px;
       right: 30px;
       z-index: 1020;
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--primary-pink) 0%, var(--dark-pink) 100%);
       color: white;
@@ -102,7 +100,6 @@
       }
     }
     
-    /* Text label that appears on hover */
     .floating-book-btn::after {
       content: 'Book Now';
       position: absolute;
@@ -166,7 +163,6 @@
       filter: invert(1); 
     }
 
-    /* Overlay for mobile only */
     @media (max-width: 991px) {
       #menu-overlay {
         position: fixed;
@@ -181,7 +177,7 @@
       }
       .navbar-collapse {
         position: fixed;
-        top: 90px; /* Adjusted to account for fixed navbar height */
+        top: 90px;
         left: 0;
         right: 0;
         z-index: 999;
@@ -192,24 +188,21 @@
         overflow-y: auto;
       }
       
-      /* Adjust floating button for mobile */
       .floating-book-btn {
         bottom: 20px;
         right: 20px;
-        width: 70px;
-        height: 70px;
+        width: 55px;
+        height: 55px;
       }
       
       .floating-book-btn::after {
-        display: none; /* Hide text label on mobile */
+        display: none;
       }
     }
     
-   
-      /* Hide the book now button in navbar on desktop */
-      .navbar .btn-primary {
-        display: none;
-      }
+    .navbar .btn-primary {
+      display: none;
+    }
 
     .logo {
       width: 60px;
@@ -231,7 +224,6 @@
       height: 1rem;
     }
     
-    /* Service Details */
     .service-modal-img {
       width: 100%;
       height: 250px;
@@ -276,7 +268,6 @@
       font-size: 0.9rem;
     }
     
-    /* Custom Title Styles */
     .brand-title {
       font-family: 'Playfair Display', serif;
       font-weight: 700;
@@ -308,7 +299,6 @@
       margin-top: -5px;
     }
     
-    /* Section title enhancements */
     .section-title {
       font-family: 'Playfair Display', serif;
       font-weight: 600;
@@ -328,7 +318,6 @@
       background: linear-gradient(90deg, var(--primary-pink), var(--gold));
     }
     
-    /* Custom logo styling */
     .custom-logo {
       width: 40px;
       height: 40px;
@@ -348,23 +337,19 @@
       box-shadow: 0 6px 15px rgba(0,0,0,0.2);
     }
     
-    /* Gold accent elements */
     .gold-accent {
       color: var(--gold);
     }
     
-    /* Footer enhancements */
     footer {
       background: linear-gradient(to right, #2d3748, #1a202c);
     }
     
-    /* Navigation enhancements */
     .navbar.scrolled {
       background: rgba(0, 0, 0, 0.9) !important;
       backdrop-filter: blur(10px);
     }
     
-    /* Breadcrumb */
     .breadcrumb {
       background-color: transparent;
       padding: 0.75rem 1rem;
@@ -379,7 +364,6 @@
       color: var(--gold);
     }
     
-    /* Service Hero */
     .service-hero {
       background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('');
       background-size: cover;
@@ -390,7 +374,6 @@
       text-align: center;
     }
     
-    /* Package image styling */
     .package-image {
       height: 500px;
       width: 300px;
@@ -399,7 +382,6 @@
       margin-bottom: 15px;
     }
 
-    /* Custom message modal for alerts */
     .message-modal .modal-content {
       border-radius: 1rem;
     }
@@ -410,7 +392,6 @@
       border-top-right-radius: 1rem;
     }
 
-    /* Date and time picker styling */
     .datetime-container {
       background-color: #f9fafb;
       border-radius: 8px;
@@ -452,7 +433,6 @@
       text-decoration: line-through;
     }
     
-    /* Loading spinner for form submission */
     .submit-spinner {
       display: inline-block;
       width: 1rem;
@@ -517,7 +497,7 @@
 
   <!-- Floating Book Now Button -->
   <div class="floating-book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal">
-  <i class="fas fa-calendar-check" style="font-size: 26px;"></i>
+  <i class="fas fa-calendar-check"></i>
   <span class="cart-count" id="floating-cart-count">0</span>
 </div>
 
@@ -860,7 +840,69 @@
           slotElement.className = 'time-slot';
           slotElement.textContent = slot;
           slotElement.dataset.time = slot;
-          slotElement.addEventListener('click', () => selectTimeSlot(slot));
+          
+          // Randomly mark some slots as unavailable (for demo purposes)
+       // Add this code to your existing JavaScript
+
+// Sample booked appointments (in a real app, this would come from a server)
+const bookedAppointments = [
+  { date: '2025-09-20', time: '10:00 AM' },
+  { date: '2025-09-20', time: '2:00 PM' },
+  { date: '2025-09-22', time: '11:00 AM' },
+  { date: '2025-09-22', time: '4:00 PM' }
+];
+
+// Function to check if a time slot is available
+function isTimeSlotAvailable(date, time) {
+  return !bookedAppointments.some(appt => 
+    appt.date === date && appt.time === time
+  );
+}
+
+// Update the generateTimeSlots function to check availability
+function generateTimeSlots() {
+  const timeSlots = [
+    '9:00 AM', '10:00 AM', '11:00 AM', 
+    '12:00 PM', '1:00 PM', '2:00 PM', 
+    '3:00 PM', '4:00 PM', '5:00-9:00 PM'
+  ];
+  
+  timeSlotsContainer.innerHTML = '';
+  
+  timeSlots.forEach(slot => {
+    const slotElement = document.createElement('div');
+    const isAvailable = selectedDate ? isTimeSlotAvailable(selectedDate, slot) : true;
+    
+    slotElement.className = `time-slot ${!isAvailable ? 'unavailable' : ''}`;
+    slotElement.textContent = slot;
+    slotElement.dataset.time = slot;
+    
+    if (isAvailable) {
+      slotElement.addEventListener('click', () => selectTimeSlot(slot));
+    }
+    
+    timeSlotsContainer.appendChild(slotElement);
+  });
+}
+
+// Update the date change event to regenerate time slots with availability
+bookingDateInput.addEventListener('change', (e) => {
+  selectedDate = e.target.value;
+  const dateObj = new Date(selectedDate);
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  selectedDateText.textContent = dateObj.toLocaleDateString('en-US', options);
+  
+  // Regenerate time slots with availability check
+  generateTimeSlots();
+  
+  // Reset selected time
+  selectedTime = null;
+  selectedTimeText.textContent = 'No time selected';
+});
+
+// Also call generateTimeSlots on page load
+generateTimeSlots();
+          
           timeSlotsContainer.appendChild(slotElement);
         });
       }
@@ -920,67 +962,6 @@
             </div>
           `;
           document.body.appendChild(toast);
-
-          // Add this code to your existing JavaScript
-
-// Sample booked appointments (in a real app, this would come from a server)
-const bookedAppointments = [
-  { date: '2025-09-20', time: '10:00 AM' },
-  { date: '2025-09-20', time: '2:00 PM' },
-  { date: '2025-09-22', time: '11:00 AM' },
-  { date: '2025-09-22', time: '4:00 PM' }
-];
-
-// Function to check if a time slot is available
-function isTimeSlotAvailable(date, time) {
-  return !bookedAppointments.some(appt => 
-    appt.date === date && appt.time === time
-  );
-}
-
-// Update the generateTimeSlots function to check availability
-function generateTimeSlots() {
-  const timeSlots = [
-    '9:00 AM', '10:00 AM', '11:00 AM', 
-    '12:00 PM', '1:00 PM', '2:00 PM', 
-    '3:00 PM', '4:00 PM', '5:00 PM'
-  ];
-  
-  timeSlotsContainer.innerHTML = '';
-  
-  timeSlots.forEach(slot => {
-    const slotElement = document.createElement('div');
-    const isAvailable = selectedDate ? isTimeSlotAvailable(selectedDate, slot) : true;
-    
-    slotElement.className = `time-slot ${!isAvailable ? 'unavailable' : ''}`;
-    slotElement.textContent = slot;
-    slotElement.dataset.time = slot;
-    
-    if (isAvailable) {
-      slotElement.addEventListener('click', () => selectTimeSlot(slot));
-    }
-    
-    timeSlotsContainer.appendChild(slotElement);
-  });
-}
-
-// Update the date change event to regenerate time slots with availability
-bookingDateInput.addEventListener('change', (e) => {
-  selectedDate = e.target.value;
-  const dateObj = new Date(selectedDate);
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  selectedDateText.textContent = dateObj.toLocaleDateString('en-US', options);
-  
-  // Regenerate time slots with availability check
-  generateTimeSlots();
-  
-  // Reset selected time
-  selectedTime = null;
-  selectedTimeText.textContent = 'No time selected';
-});
-
-// Also call generateTimeSlots on page load
-generateTimeSlots();
           
           // Remove toast after 3 seconds
           setTimeout(() => {
@@ -1011,21 +992,26 @@ generateTimeSlots();
       // Function to send data to Google Sheets
       async function sendDataToGoogleSheets(bookingData) {
         // Replace with your Google Apps Script Web App URL
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyKGePN3xgRKt_fdSVTVpEDYUuq-BFTAdJmuTb6NuAhbC2jFSYbX18a4Nf-FtWBHSI9/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz-dAbpliua4_WEMQ0GztlaQO8Bs-nEWxdVbLv_TQIg5StwuCAZ-THd9hsD4X9bSnUhGw/exec';
         
         try {
+          // Create form data
+          const formData = new FormData();
+          for (const key in bookingData) {
+            formData.append(key, bookingData[key]);
+          }
+          
           const response = await fetch(scriptURL, {
             method: 'POST',
-            mode: 'no-cors',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(bookingData)
+            body: formData
           });
           
-          // Since we're using no-cors mode, we can't read the response
-          // But we assume it was successful if no error is thrown
-          return true;
+          if (response.ok) {
+            return true;
+          } else {
+            console.error('Error response from server:', response);
+            return false;
+          }
         } catch (error) {
           console.error('Error sending data to Google Sheets:', error);
           return false;
@@ -1062,9 +1048,9 @@ generateTimeSlots();
 
         // Prepare booking data
         const bookingData = {
-          timestamp: new Date().toISOString(),
-          name,
-          phone,
+          timestamp: new Date().toLocaleString(),
+          name: name,
+          phone: phone,
           address: `${house}, ${area}, ${city}, ${pincode}`,
           date: selectedDate,
           time: selectedTime,
@@ -1192,6 +1178,7 @@ generateTimeSlots();
         const pincode = address.postcode || "";
 
         // Set the values in the form
+        // AKfycbwxFhauqhfG2o7A4T6DQMotU072vSIVYiXX064n1ViU-8osjhTwyYzS61iJe9sbXd_c6g
         document.getElementById('house-input').value = house;
         document.getElementById('area-input').value = [road, area].filter(Boolean).join(", ");
         document.getElementById('city-input').value = city;
@@ -1202,8 +1189,6 @@ generateTimeSlots();
         locationBtnText.textContent = "Use Current Location";
         locationSpinner.classList.add('d-none');
       }
-
-      // AKfycbyDtD5sZRYBZN32mGYBVKnyfJGAgLQs0NPXfJ7FtgOtPnwOaPf3CzBVjAy_A67C2992MQ
       
       // Initialize time slots
       generateTimeSlots();
@@ -1211,3 +1196,4 @@ generateTimeSlots();
   </script>
 </body>
 </html>
+
