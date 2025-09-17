@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TheBridalTouch - Premium Bridal Makeup & Mehendi Services</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-pink: #ec4899;
+      --dark-pink: #db2777;
+      --gold: #d4af37;
+      --light-gold: #f8e9c9;
+    }
+    
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 0;
+      padding-top: 90px;
+    }
+    
+    .brand-font {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .navbar-dark .navbar-nav .nav-link:hover,
+    .navbar-dark .navbar-brand:hover { 
+      color: #fce7f3; 
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 1030;
+      background: rgba(0, 0, 0, 0.9) !important;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .floating-book-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1020;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-pink) 0%, var(--dark-pink) 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(236, 72, 153, 0.4);
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+    
+    .floating-book-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(236, 72, 153, 0.6);
+    }
+    
+    .floating-book-btn .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: white;
+      color: var(--primary-pink);
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(236, 72, 153, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
+      }
+    }
+    
+    .floating-book-btn::after {
+      content: 'Book Now';
+      position: absolute;
+      right: 70px;
+      white-space: nowrap;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 8px 15px;
+      border-radius: 4px;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    
+    .floating-book-btn:hover::after {
+      opacity: 1;
+    }
+    
+    .service-card { 
+      height: 100%; 
+      min-height: 350px; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+      transition: transform 0.2s ease; 
+    }
+    
+    .service-card:hover { 
+      transform: scale(1.05); 
+    }
+    
+    .service-card img { 
+      height: 200px; 
+      object-fit: cover; 
+      border-radius: 0.5rem 0.5rem 0 0; 
+    }
+
+    .badge { 
+      padding: 0.35em 0.65em; 
+      font-size: 0.75em; 
+      font-weight: 700; 
+      border-radius: 0.25rem; 
+    }
+
+    .btn-primary { 
+      background-color: var(--primary-pink); 
+      border-color: var(--primary-pink); 
+    }
+    
+    .btn-primary:hover { 
+      background-color: var(--dark-pink); 
+      border-color: var(--dark-pink); 
+    }
+
+    .modal-header { 
+      background-color: var(--primary-pink) !important; 
+      color: white !important; 
+    }
+    
+    .btn-close { 
+      filter: invert(1); 
+    }
+
+    @media (max-width: 991px) {
+      #menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(6px);
+        z-index: 998;
+        display: none;
+      }
+      .navbar-collapse.show ~ #menu-overlay {
+        display: flex;
+      }
+      .navbar-collapse {
+        position: fixed;
+        top: 90px;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        max-height: calc(100vh - 90px);
+        overflow-y: auto;
+      }
+      
+      .floating-book-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+      }
+      
+      .floating-book-btn::after {
+        display: none;
+      }
+    }
+    
+    .navbar .btn-primary {
+      display: none;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: scale(1.1);
+    }
+    
+    #location-status {
+      font-size: 0.8rem;
+      margin-top: 5px;
+    }
+    
+    .spinner-border-sm {
+      width: 1rem;
+      height: 1rem;
+    }
+    
+    .service-modal-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    
+    .sub-service-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .sub-service-card:hover {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transform: translateY(-3px);
+    }
+    
+    .sub-service-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .sub-service-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--primary-pink);
+    }
+    
+    .sub-service-price {
+      font-weight: bold;
+      color: #4caf50;
+    }
+    
+    .sub-service-description {
+      color: #666;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+    
+    .brand-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--primary-pink) 0%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .brand-title::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    
+    .brand-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-top: -5px;
+    }
+    
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-pink), var(--gold));
+    }
+    
+    .custom-logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary-pink) 0%, var(--gold) 100%);
+      border-radius: 50% !important; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+    
+    .custom-logo:hover {
+      transform: rotate(10deg) scale(1.1);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    
+    .gold-accent {
+      color: var(--gold);
+    }
+    
+    footer {
+      background: linear-gradient(to right, #2d3748, #1a202c);
+    }
+    
+    .navbar.scrolled {
+      background: rgba(0, 0, 0, 0.9) !important;
+      backdrop-filter: blur(10px);
+    }
+    
+    .breadcrumb {
+      background-color: transparent;
+      padding: 0.75rem 1rem;
+    }
+    
+    .breadcrumb-item a {
+      color: var(--primary-pink);
+      text-decoration: none;
+    }
+    
+    .breadcrumb-item.active {
+      color: var(--gold);
+    }
+    
+    .service-hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('');
+      background-size: cover;
+      background-position: center;
+      padding: 400px 0 60px;
+      margin-top: -170px;
+      color: white;
+      text-align: center;
+    }
+    
+    .package-image {
+      height: 500px;
+      width: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .message-modal .modal-content {
+      border-radius: 1rem;
+    }
+    
+    .message-modal .modal-header {
+      background-color: var(--primary-pink);
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+    }
+
+    .datetime-container {
+      background-color: #f9fafb;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    
+    .time-slots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .time-slot {
+      padding: 8px 5px;
+      text-align: center;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .time-slot:hover {
+      background-color: #fce7f3;
+    }
+    
+    .time-slot.selected {
+      background-color: var(--primary-pink);
+      color: white;
+      border-color: var(--primary-pink);
+    }
+    
+    .time-slot.unavailable {
+      background-color: #f3f4f6;
+      color: #9ca3af;
+      cursor: not-allowed;
+      text-decoration: line-through;
+    }
+    
+    .submit-spinner {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      vertical-align: middle;
+      border: 2px solid #fff;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: spinner-border 0.75s linear infinite;
+      margin-right: 0.5rem;
+    }
+    
+    @keyframes spinner-border {
+      to { transform: rotate(360deg); }
+    }
+    
+  </style>
+</head>
+<body class="bg-black font-sans">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark py-3" id="navbar">
+    <div class="container-fluid mx-auto px-4 sm:px-6 lg:px-8">
+      <a class="navbar-brand flex items-center space-x-3" href="Home.html">
+        <div class="custom-logo">
+          <i class="fas fa-crown" href="#"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="brand-title text-2xl mb-2">TheBridalTouch</span>
+          <span class="brand-tagline">Where Elegance Meets Tradition</span>
+        </div>
+      </a>
+
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menu -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav space-x-4">
+          <li class="nav-item"><a class="nav-link text-white" href="Home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="Home.html#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="Home.html#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="Home.html#contact">Contact</a></li>
+        </ul>
+
+        <!-- Phone number shown below logo in toggle -->
+        <div class="d-lg-none mt-3 text-white w-100">
+          <p class="text-center font-bold"><i class="fas fa-phone gold-accent"></i> +91 9296218800</p>
+        </div>
+      </div>
+
+      <!-- Booking Button (hidden on desktop, shown on mobile) -->
+      <button type="button" class="btn btn-primary rounded-full px-4 d-lg-none" data-bs-toggle="modal" data-bs-target="#bookingModal">
+        Book Now <span class="badge bg-white text-pink-500 ml-1" id="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+  <div id="menu-overlay"></div>
+
+  <!-- Floating Book Now Button -->
+  <div class="floating-book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal">
+  <i class="fas fa-calendar-check"></i>
+  <span class="cart-count" id="floating-cart-count">0</span>
+</div>
+
+
+  <!-- Sub Services Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="section-title text-3xl sm:text-4xl font-bold text-center text-gray-800">Our Hair Styling Packages</h2>
+      
+      <div class="row">
+      <!--Bridal Hair Styling-->
+        <div class="col-md-6 mb-4">
+          <div class="sub-service-card">
+            <img src="img-hair/bridal hair.jpg" alt="Bridal Hair Styling" class="package-image">
+            <div class="sub-service-header">
+              <div class="sub-service-title">Bridal Hair Styling</div>
+              <div class="sub-service-price">₹6999</div>
+            </div>
+            <div class="sub-service-description">
+              Elegant buns, braids, or open curls for brides.
+              Accessory & veil setting included.
+            </div>
+            <button class="btn btn-primary add-sub-service" data-price="6999" data-name="Bridal Hair Styling">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        
+        <!-- Party Hair Styling -->
+        <div class="col-md-6 mb-4">
+          <div class="sub-service-card">
+            <img src="img-hair/party hair.jpg" alt="Party Hair Styling" class="package-image">
+            <div class="sub-service-header">
+              <div class="sub-service-title">Party Hair Styling (Hair cut + curls) </div> 
+              <div class="sub-service-price">₹5999</div>
+            </div>
+            <div class="sub-service-description">
+              Glamorous curls, waves, or updos.
+              Perfect for cocktail parties, sangeet, or receptions.
+            </div>
+            <button class="btn btn-primary add-sub-service" data-price="5999" data-name="Party Hair Styling">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        
+        <!-- Casual / Everyday Styling -->
+        <div class="col-md-6 mb-4">
+          <div class="sub-service-card">
+            <img src="img-hair/casual hair.jpg" alt="Casual / Everyday Styling" class="package-image">
+            <div class="sub-service-header">
+              <div class="sub-service-title">Casual / Everyday Styling</div>
+              <div class="sub-service-price">₹2500</div>
+            </div>
+            <div class="sub-service-description">
+              Simple blow-dry, straightening, or soft curls.
+              Quick touch-ups for daily look.
+            </div>
+            <button class="btn btn-primary add-sub-service" data-price="2500" data-name="Casual / Everyday Styling">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        
+        <!-- Hair Coloring & Highlights -->
+        <div class="col-md-6 mb-4">
+          <div class="sub-service-card">
+            <img src="img-hair/color hair.jpg" alt="Hair Coloring & Highlights" class="package-image">
+            <div class="sub-service-header">
+              <div class="sub-service-title">Hair Coloring & Highlights</div>
+              <div class="sub-service-price">₹1500</div>
+            </div>
+            <div class="sub-service-description">
+              Global hair color, streaks, balayage, ombré.
+              Root touch-up services.
+            </div>
+            <button class="btn btn-primary add-sub-service" data-price="1500" data-name="Hair Coloring & Highlights">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        
+        <!-- Hair Treatments -->
+        <div class="col-md-6 mb-4">
+          <div class="sub-service-card">
+            <img src="img-hair/hair treatment.jpg" alt="Hair Treatments" class="package-image">
+            <div class="sub-service-header">
+              <div class="sub-service-title">Hair Treatments</div>
+              <div class="sub-service-price">₹5000</div>
+            </div>
+            <div class="sub-service-description">
+              Smoothening, Keratin, Rebonding
+              Spa treatments for nourishment & shine.
+            </div>
+            <button class="btn btn-primary add-sub-service" data-price="5000" data-name="Hair Treatments">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="section-title text-3xl sm:text-4xl font-bold text-gray-800">What Our Brides Say</h2>
+      
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 p-4">
+            <div class="text-yellow-400 mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="text-gray-600 mb-4">"The Premium Bridal Package was worth every penny! I felt like a princess on my wedding day."</p>
+            <p class="font-bold">- Priya S.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 p-4">
+            <div class="text-yellow-400 mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="text-gray-600 mb-4">"The trial session helped me finalize the perfect look. The makeup lasted all day and photographed beautifully!"</p>
+            <p class="font-bold">- Anjali M.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 p-4">
+            <div class="text-yellow-400 mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="text-gray-600 mb-4">"The artists understood exactly what I wanted and enhanced my features perfectly. Highly recommend!"</p>
+            <p class="font-bold">- Riya K.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8 text-center">
+    <div class="container mx-auto">
+      <div class="flex flex-col items-center mb-6">
+        <div class="custom-logo mb-4">
+          <i class="fas fa-crown"></i>
+        </div>
+        <h3 class="brand-title text-2xl mb-2">TheBridalTouch</h3>
+        <p class="brand-tagline">Where Elegance Meets Tradition</p>
+      </div>
+      <div class="flex justify-center space-x-6 mb-6">
+        <a href="https://www.facebook.com/" class="text-2xl hover:text-pink-400 transition" target="_main"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/" class="text-2xl hover:text-pink-400 transition" target="_main"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/9296218880" class="text-2xl hover:text-pink-400 transition" target="_main"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <p>&copy; 2025 TheBridalTouch. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Booking Modal -->
+  <div class="modal fade" id="bookingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-pink-500 text-white">
+          <h5 class="modal-title">Your Bookings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="cart-items-container"><p id="empty-cart-message" class="text-gray-500 text-center">Your cart is empty.</p></div>
+          <div class="mt-4 pt-4 border-t border-gray-200 flex justify-between font-bold">
+            <span>Total Price:</span><span id="total-price">₹0.00</span>
+          </div>
+
+          <!-- Date and Time Selection -->
+          <div class="datetime-container mt-4">
+            <h6 class="mb-3">Select Date & Time</h6>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="booking-date" class="form-label">Date:</label>
+                <input type="date" id="booking-date" class="form-control" min="">
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Time Slot:</label>
+                <div class="time-slots" id="time-slots-container">
+                  <!-- Time slots will be generated here -->
+                </div>
+              </div>
+            </div>
+            
+            <div id="selected-datetime" class="mt-3 p-2 bg-pink-100 rounded text-center">
+              <i class="fas fa-calendar-alt me-2"></i>
+              <span id="selected-date-text">No date selected</span>
+              <i class="fas fa-clock ms-3 me-2"></i>
+              <span id="selected-time-text">No time selected</span>
+            </div>
+          </div>
+
+          <!-- Booking Details -->
+          <div class="mt-4">
+            <h6 class="mb-3">Your Details</h6>
+            
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <label>Name:</label>
+                <input type="text" id="name-input" class="form-control" required>
+              </div>
+              
+              <div class="col-md-6 mb-2">
+                <label>Phone:</label>
+                <input type="text" id="phone-input" class="form-control" required>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-4 mb-2">
+                <label>House No:</label>
+                <input type="text" id="house-input" class="form-control" required>
+              </div>
+              
+              <div class="col-md-8 mb-2">
+                <label>Area:</label>
+                <input type="text" id="area-input" class="form-control" required>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <label>City:</label>
+                <input type="text" id="city-input" class="form-control" required>
+              </div>
+              
+              <div class="col-md-6 mb-2">
+                <label>Pincode:</label>
+                <input type="text" id="pincode-input" class="form-control" required>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-secondary mt-2 w-100" id="get-location-btn">
+              <span id="location-btn-text">Use Current Location</span>
+              <span id="location-spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+            </button>
+            <p id="location-status" class="text-sm mt-2"></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary" id="final-confirm-btn">
+            <span id="confirm-btn-text">Confirm Booking</span>
+            <span id="submit-spinner" class="submit-spinner d-none"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message Modal for alerts -->
+  <div class="modal fade message-modal" id="messageModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-header bg-pink-500 text-white">
+          <h5 class="modal-title" id="messageModalTitle">Message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p id="messageModalBody"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartCountElement = document.getElementById('cart-count');
+      const floatingCartCountElement = document.getElementById('floating-cart-count');
+      const cartItemsContainer = document.getElementById('cart-items-container');
+      const totalPriceElement = document.getElementById('total-price');
+      const emptyCartMessage = document.getElementById('empty-cart-message');
+      const finalConfirmBtn = document.getElementById('final-confirm-btn');
+      const confirmBtnText = document.getElementById('confirm-btn-text');
+      const submitSpinner = document.getElementById('submit-spinner');
+      const getLocationBtn = document.getElementById('get-location-btn');
+      const locationBtnText = document.getElementById('location-btn-text');
+      const locationSpinner = document.getElementById('location-spinner');
+      const locationStatus = document.getElementById('location-status');
+      const bookingDateInput = document.getElementById('booking-date');
+      const timeSlotsContainer = document.getElementById('time-slots-container');
+      const selectedDateText = document.getElementById('selected-date-text');
+      const selectedTimeText = document.getElementById('selected-time-text');
+      
+      let cart = [];
+      let selectedDate = null;
+      let selectedTime = null;
+      
+      // Set minimum date to today
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      const todayStr = `${yyyy}-${mm}-${dd}`;
+      bookingDateInput.min = todayStr;
+
+      // Function to show a custom message modal
+      function showMessage(title, message) {
+        const modalTitle = document.getElementById('messageModalTitle');
+        const modalBody = document.getElementById('messageModalBody');
+        modalTitle.textContent = title;
+        modalBody.textContent = message;
+        const messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
+        messageModal.show();
+      }
+
+      // Generate time slots
+      function generateTimeSlots() {
+        const timeSlots = [
+          '9:00 AM', '10:00 AM', '11:00 AM', 
+          '12:00 PM', '1:00 PM', '2:00 PM', 
+          '3:00 PM', '4:00 PM', '5:00 PM'
+        ];
+        
+        timeSlotsContainer.innerHTML = '';
+        
+        timeSlots.forEach(slot => {
+          const slotElement = document.createElement('div');
+          slotElement.className = 'time-slot';
+          slotElement.textContent = slot;
+          slotElement.dataset.time = slot;
+          
+          // Randomly mark some slots as unavailable (for demo purposes)
+       // Add this code to your existing JavaScript
+
+// Sample booked appointments (in a real app, this would come from a server)
+const bookedAppointments = [
+  { date: '2025-09-20', time: '10:00 AM' },
+  { date: '2025-09-20', time: '2:00 PM' },
+  { date: '2025-09-22', time: '11:00 AM' },
+  { date: '2025-09-22', time: '4:00 PM' }
+];
+
+// Function to check if a time slot is available
+function isTimeSlotAvailable(date, time) {
+  return !bookedAppointments.some(appt => 
+    appt.date === date && appt.time === time
+  );
+}
+
+// Update the generateTimeSlots function to check availability
+function generateTimeSlots() {
+  const timeSlots = [
+    '9:00 AM', '10:00 AM', '11:00 AM', 
+    '12:00 PM', '1:00 PM', '2:00 PM', 
+    '3:00 PM', '4:00 PM', '5:00-9:00 PM'
+  ];
+  
+  timeSlotsContainer.innerHTML = '';
+  
+  timeSlots.forEach(slot => {
+    const slotElement = document.createElement('div');
+    const isAvailable = selectedDate ? isTimeSlotAvailable(selectedDate, slot) : true;
+    
+    slotElement.className = `time-slot ${!isAvailable ? 'unavailable' : ''}`;
+    slotElement.textContent = slot;
+    slotElement.dataset.time = slot;
+    
+    if (isAvailable) {
+      slotElement.addEventListener('click', () => selectTimeSlot(slot));
+    }
+    
+    timeSlotsContainer.appendChild(slotElement);
+  });
+}
+
+// Update the date change event to regenerate time slots with availability
+bookingDateInput.addEventListener('change', (e) => {
+  selectedDate = e.target.value;
+  const dateObj = new Date(selectedDate);
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  selectedDateText.textContent = dateObj.toLocaleDateString('en-US', options);
+  
+  // Regenerate time slots with availability check
+  generateTimeSlots();
+  
+  // Reset selected time
+  selectedTime = null;
+  selectedTimeText.textContent = 'No time selected';
+});
+
+// Also call generateTimeSlots on page load
+generateTimeSlots();
+          
+          timeSlotsContainer.appendChild(slotElement);
+        });
+      }
+      
+      // Select time slot
+      function selectTimeSlot(time) {
+        // Remove selected class from all slots
+        document.querySelectorAll('.time-slot').forEach(slot => {
+          slot.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked slot
+        const selectedSlot = document.querySelector(`.time-slot[data-time="${time}"]`);
+        if (selectedSlot) {
+          selectedSlot.classList.add('selected');
+          selectedTime = time;
+          selectedTimeText.textContent = time;
+        }
+      }
+      
+      // Handle date selection
+      bookingDateInput.addEventListener('change', (e) => {
+        selectedDate = e.target.value;
+        const dateObj = new Date(selectedDate);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        selectedDateText.textContent = dateObj.toLocaleDateString('en-US', options);
+        
+        // When date changes, regenerate time slots
+        generateTimeSlots();
+        
+        // Reset selected time
+        selectedTime = null;
+        selectedTimeText.textContent = 'No time selected';
+      });
+
+      // Add sub-service to cart
+      document.addEventListener('click', e => {
+        if (e.target.classList.contains('add-sub-service')) {
+          const name = e.target.dataset.name;
+          const price = parseInt(e.target.dataset.price);
+          
+          cart.push({ name, price });
+          updateCartUI();
+          
+          // Show confirmation toast
+          const toast = document.createElement('div');
+          toast.className = 'position-fixed bottom-0 end-0 p-3';
+          toast.style.zIndex = '1050';
+          toast.innerHTML = `
+            <div class="toast align-items-center text-white bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="d-flex">
+                <div class="toast-body">
+                  <i class="fas fa-check-circle mr-2"></i>${name} added to cart!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(toast);
+          
+          // Remove toast after 3 seconds
+          setTimeout(() => {
+            const toastEl = new bootstrap.Toast(toast.querySelector('.toast'));
+            toastEl.hide();
+            toast.addEventListener('hidden.bs.toast', () => toast.remove());
+          }, 3000);
+        }
+      });
+
+      function updateCartUI() {
+        cartCountElement.textContent = cart.length;
+        floatingCartCountElement.textContent = cart.length;
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+        if (cart.length === 0) {
+          emptyCartMessage.style.display = 'block';
+        } else {
+          emptyCartMessage.style.display = 'none';
+          cart.forEach(item => {
+            total += item.price;
+            cartItemsContainer.innerHTML += `<div class="d-flex justify-content-between py-2 border-b"><span>${item.name}</span><span>₹${item.price.toLocaleString()}</span></div>`;
+          });
+        }
+        totalPriceElement.textContent = `₹${total.toLocaleString()}`;
+      }
+
+      // Function to send data to Google Sheets
+      async function sendDataToGoogleSheets(bookingData) {
+        // Replace with your Google Apps Script Web App URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz-dAbpliua4_WEMQ0GztlaQO8Bs-nEWxdVbLv_TQIg5StwuCAZ-THd9hsD4X9bSnUhGw/exec';
+        
+        try {
+          // Create form data
+          const formData = new FormData();
+          for (const key in bookingData) {
+            formData.append(key, bookingData[key]);
+          }
+          
+          const response = await fetch(scriptURL, {
+            method: 'POST',
+            body: formData
+          });
+          
+          if (response.ok) {
+            return true;
+          } else {
+            console.error('Error response from server:', response);
+            return false;
+          }
+        } catch (error) {
+          console.error('Error sending data to Google Sheets:', error);
+          return false;
+        }
+      }
+
+      finalConfirmBtn.addEventListener('click', async () => {
+        const name = document.getElementById('name-input').value;
+        const phone = document.getElementById('phone-input').value;
+        const house = document.getElementById('house-input').value;
+        const area = document.getElementById('area-input').value;
+        const city = document.getElementById('city-input').value;
+        const pincode = document.getElementById('pincode-input').value;
+
+        if (!name || !phone || !house || !area || !city || !pincode) {
+          showMessage('Incomplete Information', 'Please fill all fields before confirming your booking.');
+          return;
+        }
+        
+        if (!selectedDate || !selectedTime) {
+          showMessage('Date/Time Missing', 'Please select both a date and time slot for your appointment.');
+          return;
+        }
+        
+        if (cart.length === 0) {
+          showMessage('Empty Cart', 'Please add at least one service to your cart before booking.');
+          return;
+        }
+
+        // Show loading state
+        confirmBtnText.textContent = 'Processing...';
+        submitSpinner.classList.remove('d-none');
+        finalConfirmBtn.disabled = true;
+
+        // Prepare booking data
+        const bookingData = {
+          timestamp: new Date().toLocaleString(),
+          name: name,
+          phone: phone,
+          address: `${house}, ${area}, ${city}, ${pincode}`,
+          date: selectedDate,
+          time: selectedTime,
+          services: cart.map(item => item.name).join(', '),
+          total: cart.reduce((sum, item) => sum + item.price, 0),
+          status: 'Pending'
+        };
+
+        // Send data to Google Sheets
+        const success = await sendDataToGoogleSheets(bookingData);
+        
+        // Reset loading state
+        confirmBtnText.textContent = 'Confirm Booking';
+        submitSpinner.classList.add('d-none');
+        finalConfirmBtn.disabled = false;
+
+        if (success) {
+          showMessage('Booking Confirmed!', `Thank you for choosing TheBridalTouch. Your booking for ${selectedDate} at ${selectedTime} has been successfully placed. We will contact you shortly.`);
+          cart = [];
+          updateCartUI();
+          
+          // Reset form
+          document.getElementById('name-input').value = '';
+          document.getElementById('phone-input').value = '';
+          document.getElementById('house-input').value = '';
+          document.getElementById('area-input').value = '';
+          document.getElementById('city-input').value = '';
+          document.getElementById('pincode-input').value = '';
+          bookingDateInput.value = '';
+          selectedDate = null;
+          selectedTime = null;
+          selectedDateText.textContent = 'No date selected';
+          selectedTimeText.textContent = 'No time selected';
+          
+          // Reset time slots
+          document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.classList.remove('selected');
+          });
+          
+          document.getElementById('bookingModal').querySelector('.btn-close').click();
+        } else {
+          showMessage('Error', 'There was an error processing your booking. Please try again or contact us directly.');
+        }
+      });
+
+      // Navbar scroll effect
+      window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Use My Location function
+      getLocationBtn.addEventListener('click', () => {
+        if ("geolocation" in navigator) {
+          locationBtnText.textContent = "Fetching...";
+          locationSpinner.classList.remove('d-none');
+          locationStatus.textContent = "Fetching your current location...";
+
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const lat = position.coords.latitude;
+              const lon = position.coords.longitude;
+              locationStatus.textContent = "Location found. Getting address details...";
+              
+              // Using OpenStreetMap's Nominatim for reverse geocoding
+              fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                .then(response => {
+                  if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                  }
+                  return response.json();
+                })
+                .then(data => {
+                  if (data && data.address) {
+                    fillAddressFields(data.address);
+                    locationStatus.textContent = "Address populated successfully.";
+                  } else {
+                    locationStatus.textContent = "Unable to find address for this location.";
+                  }
+                  resetLocationButton();
+                })
+                .catch(error => {
+                  console.error('Error fetching address:', error);
+                  locationStatus.textContent = "Error fetching address. Please enter manually.";
+                  resetLocationButton();
+                });
+            },
+            (error) => {
+              console.error("Geolocation error:", error);
+              let errorMessage = "Unable to retrieve your location.";
+              switch(error.code) {
+                case error.PERMISSION_DENIED:
+                  errorMessage += " Please enable location permissions for this site.";
+                  break;
+                case error.POSITION_UNAVAILABLE:
+                  errorMessage += " Location information is unavailable.";
+                  break;
+                case error.TIMEOUT:
+                  errorMessage += " The request to get user location timed out.";
+                  break;
+                default:
+                  errorMessage += " An unknown error occurred.";
+                  break;
+              }
+              locationStatus.textContent = errorMessage;
+              resetLocationButton();
+              showMessage('Location Error', errorMessage);
+            }
+          );
+        } else {
+          showMessage('Unsupported', 'Geolocation is not supported by your browser. Please enter your address manually.');
+        }
+      });
+      
+      function fillAddressFields(address) {
+        // Extract address components from the response, with fallbacks
+        const house = address.house_number || address.building || address.leisure || "";
+        const road = address.road || address.pedestrian || "";
+        const area = address.suburb || address.quarter || address.hamlet || address.village || "";
+        const city = address.city || address.town || address.county || address.state || "";
+        const pincode = address.postcode || "";
+
+        // Set the values in the form
+        // AKfycbwxFhauqhfG2o7A4T6DQMotU072vSIVYiXX064n1ViU-8osjhTwyYzS61iJe9sbXd_c6g
+        document.getElementById('house-input').value = house;
+        document.getElementById('area-input').value = [road, area].filter(Boolean).join(", ");
+        document.getElementById('city-input').value = city;
+        document.getElementById('pincode-input').value = pincode;
+      }
+      
+      function resetLocationButton() {
+        locationBtnText.textContent = "Use Current Location";
+        locationSpinner.classList.add('d-none');
+      }
+      
+      // Initialize time slots
+      generateTimeSlots();
+    });
+  </script>
+</body>
+</html>
