@@ -225,8 +225,8 @@
     }
     
     .service-modal-img {
-      width: 100%;
-      height: 250px;
+      width: 200px;
+      height: 400px;
       object-fit: cover;
       border-radius: 8px;
     }
@@ -237,6 +237,8 @@
       padding: 15px;
       margin-bottom: 15px;
       transition: all 0.3s ease;
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
     
     .sub-service-card:hover {
@@ -375,13 +377,17 @@
     }
     
     .package-image {
-      height: 500px;
-      width: 300px;
+      height: 100%;
+      width: 100%;
       object-fit: cover;
       border-radius: 8px;
       margin-bottom: 15px;
     }
-
+.modal-packages-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
     .message-modal .modal-content {
       border-radius: 1rem;
     }
@@ -511,7 +517,7 @@
         <!--Basic Bridal package-->
         <div class="col-md-6 mb-4">
           <div class="sub-service-card">
-            <img src="img-bridal-makeup\basic makeup.jpg" alt="Basic Bridal Makeup" class="package-image">
+            <img src="https://i.pinimg.com/1200x/16/d7/a8/16d7a816bbc50c1bc2a626866b8aa082.jpg" alt="Basic Bridal Makeup" class="package-image">
             <div class="sub-service-header">
               <div class="sub-service-title">Basic Bridal Package (Affordable light bridal makeup.)</div>
               <div class="sub-service-price">₹9000</div>
