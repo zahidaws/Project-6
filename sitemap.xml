@@ -1,24 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://aizabridalstudio.in/</loc>
-  </url>
-  <url>
-    <loc>https://aizabridalstudio.in/bridal-makeup.html</loc>
-  </url>
-  <url>
-    <loc>https://aizabridalstudio.in/mehendi-design.html</loc>
-  </url>
-  <url>
-    <loc>https://aizabridalstudio.in/hair-styling.html</loc>
-  </url>
-   <url>
-    <loc>https://aizabridalstudio.in/party-makeup.html</loc>
-  </url>
-   <url>
-    <loc>https://aizabridalstudio.in/skincare-packages.html</loc>
-  </url>
-   <url>
-    <loc>https://aizabridalstudio.in/rental-service.html</loc>
-  </url>
+    
+    <!-- Homepage -->
+    <url>
+        <loc>https://aizabridalstudio.in/</loc>
+        <lastmod>2025-09-30</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    
+    <!-- Services Page -->
+    <url>
+        <loc>https://aizabridalstudio.in/services.html</loc>
+        <lastmod>2025-09-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Gallery Page -->
+    <url>
+        <loc>https://aizabridalstudio.in/gallery.html</loc>
+        <lastmod>2025-09-30</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Contact Page -->
+    <url>
+        <loc>https://aizabridalstudio.in/contact.html</loc>
+        <lastmod>2025-09-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Individual Service Pages -->
+    <url>
+        <loc>https://aizabridalstudio.in/bridal-makeup.html</loc>
+        <lastmod>2025-09-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://aizabridalstudio.in/hair-styling.html</loc>
+        <lastmod>2025-09-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://aizabridalstudio.in/mehendi-design.html</loc>
+        <lastmod>2025-09-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Portfolio Pages -->
+    <url>
+        <loc>https://aizabridalstudio.in/party-makeup.html</loc>
+        <lastmod>225-09-30</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://aizabridalstudio.in/skincare-packages.html</loc>
+        <lastmod>2025-09-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+ <url>
+        <loc>https://aizabridalstudio.in/rental-service.html</loc>
+        <lastmod>2025-09-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
 </urlset>
