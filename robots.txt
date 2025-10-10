@@ -1,3 +1,1 @@
-User-agent: *
-Disallow: 
-Sitemap: https://aizabridalstudio.in/sitemap.xml
+
